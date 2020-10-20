@@ -1,2 +1,5 @@
 # f5-bigip-decode
-Decode F5 BigIP Cookies
+Based on instructions at: https://support.f5.com/csp/article/K6917
+<br>
+# Usage
+bigip-decode.py -c 0000000000.00000.000
