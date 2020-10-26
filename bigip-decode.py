@@ -1,6 +1,11 @@
 from optparse import OptionParser
 from sys import exit
 
+# Decodes F5 BigIP cookies
+# Based on instructions at https://support.f5.com/csp/article/K6917
+# Usage: bigip-decode.py -c 0000000000.00000.000
+# Where -c is the F5 BigIP cookie
+
 def get_port(c_port) -> str:
     # convert the second part of the cookie to hex
     hh_port = (hex((int(c_port))))
