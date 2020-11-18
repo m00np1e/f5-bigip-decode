@@ -1,11 +1,15 @@
+#!/usr/bin/env python3
+
 from optparse import OptionParser
 from sys import exit
+
 
 # Decodes F5 BigIP cookies
 # Based on instructions at https://support.f5.com/csp/article/K6917
 # Usage: bigip-decode.py -c 0000000000.00000.000
 # Where -c is the F5 BigIP cookie
 # October 2020, Ken Mininger, kmininger@us.ibm.com
+# Thanks to Dimitry Snezhkov for the suggestions and improvements https://github.com/dsnezhkov
 
 def get_port(c_port) -> str:
     # convert the second part of the cookie to hex
@@ -15,6 +19,7 @@ def get_port(c_port) -> str:
     # turn it back into a hex number
     r_port2 = "{0}".format((r_port.replace('0x', '')))
     return str(int(r_port2, 16))
+
 
 def get_host(c_host) -> str:
     # convert the first part of the cookie to hex
@@ -28,8 +33,10 @@ def get_host(c_host) -> str:
     # print out the ip address
     return '.'.join([str(octet) for octet in xhosts])
 
+
 def reverse_bytes(payload) -> str:
     return "".join(reversed([payload[i:i + 2] for i in range(0, len(payload), 2)]))
+
 
 def main():
     parser = OptionParser()
@@ -47,6 +54,7 @@ def main():
     host = get_host(c_host)
     port = get_port(c_port)
     print("Converted: {0}".format(str(":".join([host, port]))))
+
 
 if __name__ == '__main__':
     main()
