@@ -42,7 +42,7 @@ def main():
     parser.add_option("-c", "--cookie", type="string")
     (options, args) = parser.parse_args()
     if not options.cookie:
-        parser.error("Cookie is not provided")
+        parser.error("Cookie not provided. Please provide the F5 BigIP cookie.")
         exit(1)
     # initial value of cookie
     cookie = options.cookie
@@ -52,7 +52,7 @@ def main():
     [c_host, c_port] = cookie.split('.')[:2]
     host = get_host(c_host)
     port = get_port(c_port)
-    print("Converted: {0}".format(str(":".join([host, port]))))
+    print("Decoded cookie (IP address:Port): {0}".format(str(":".join([host, port]))))
 
 
 if __name__ == '__main__':
